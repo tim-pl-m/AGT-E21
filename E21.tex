@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{AGT}
+\author{Tim Wieschalla}
+\date{November 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{21.}
+
+ Consider an auction in which the seller announces a reserve price of r before running the auction. With a reserve price, the item is sold to the highest bidder if the highest bid is above r; otherwise, the item is not sold. In a first-price auction with a reserve price, the winning bidder (if there is one) still pays her bid. In a second-price auction with a reserve price, the winning bidder (if there is one) pays the maximum of the second-place bid and the reserve price r.
+\\
+\\
+• Is truthful bidding a dominant strategy on such auctions?\\
+• Assuming that the seller assigns value u to the object and chooses the reserve price r in order to maximize its expected revenue in a SP auction. Show that r might be higher than u. (Hint. Provide a value for the simple case in which the item is worth u = 0 to the seller and a second-price auction with a single bidder, whose value is uniformly distributed on [0, 1] is run.)
+
+
+
+
+\section{Solution}
+1. first-price auction with a reserve price:\\
+recall def first-price auction: \\
+highest bid wins
+\\\\
+no, because counter-example:\\
+one bidder b1\\
+r=10 \\
+truthfull bid(real value for b1) v(b1)= 15\\
+$\rightarrow$ b1 loses/negative revenue of 5\\
+$\rightarrow$ b1 will bid 10, also bc he knows r\\
+$\rightarrow$ truthfulness is not dominant\\
+% (-> unthruthful bidding is dominant?)
+\\\\
+2. second-price auction with a reserve price
+
+% ---
+% v1 WRONG!
+% recall def second-price auction: 
+% second higest bid wins
+
+% no, bc. example:
+% two bidder
+% % r = 10
+% % v(b1) = 15
+% % v(b2) = 12
+% % b1 wins, pays 12
+% % -> truthful dominant
+
+% % r = 10
+% % v(b1) = 9
+% % v(b2) = 8 
+% % -> b1 wins, pays 10
+% % -> but wouldnt bid 9, bc he know r xD
+
+% r = 10
+% v(b1) = 9
+% v(b2) = 8 
+% -> b1 wins, pays 10
+% -> bidding 0 would have been better
+% %-> b1,b2 will bid 0, also bc they knows r <- no they won't because they want to get it (but it doesn't matter for the exercise)
+% -> truthfulness is not dominant
+
+% % TODO ask julian if this was the right example :/
+
+% ---
+% v2:
+% TODO check slide
+% idea 1: changes some things
+idea: induction over amount of player:\\
+bX = bids\\
+vX = real values for the player\\
+\\\\
+one bidder:\\
+n=1\\
+...\\
+induction:\\
+n+1:\\
+2 cases for untruthfull:\\
+-v < b: \\
+...\\
+-v > b: \\
+...\\
+
+
+
+% r = 10
+% v(b1) = 12
+% v(b2) = 8
+% -> b1 wins, pays 10
+% -> truthful dominant
+
+
+
+3. show that r might be higher than u\\
+"assumptions":\\
+u = 0\\
+single bidder\\
+V value of bidder\\
+V is uniformly distributed on [0, 1]\\
+only sold if b >= r\\
+\\\\
+
+% ---
+% solution v1:
+% % TODO explain what this means and what follows
+% % das bedeutet, dass der Wert für den Bieter gleichverteilt zwischen 0 und 1 ist.
+% % Zum Beispiel will er den Gegenstand wieder verkaufen und schätzt ein, dass er einen Wert zwischen 0 und 1 erreichen wird, weiß aben noch nicht welchen.
+% % Nur auf Grundlage dieser Einschätzung kann er sein Gebot machen. Er weiß also nicht wie viel es tatsächlich wert sein wird zum Zeitpunkt seines Gebots.
+% % Und er will E[v] - b maximeiren wo v sein wert ist und b sein gebot
+
+% E[V] in [0,1] = (0+1)/2 = 0,5
+% bc. Uniform distribution (continuous)
+% recall E(X) = 1/2(a*b)
+
+% 0 < r, bc r of 0 is giving it for free
+
+% E[V]-r is utility bc trivial
+
+% seller gains r
+
+% cases:
+% r > 0,5:  utility is negative, bc 0,5(this is E[V]) -r is negative
+% r = 0,5:  utility is zero, so buyer is free to decide, and the seller cant know if the buyer will buy, so seller will evade this case
+% r < 0,5: utility is positive, bc 0,5(this is E[V]) -r is postive
+
+% but r < 0,5 , bc if its 0,5 the bidder can do whatever he wants. so not good for seller, so
+% -> r < 0,5
+% -> 0 < r < 0,5
+
+% conclusion: the bidder will only bid if r is 0 < r < 0,5, bc postive utility.
+% BUT: the bid itself doesnt matter, bc SP-auction and he is the only bidder
+
+% % ------------------
+
+
+
+% %( its the intergral of f(x)=1 in the bounds [0, 1])
+
+% value * probablity
+% % explain why:
+% % value rises in the bounds from 0->1
+% % -> f(x)=x
+% % probability of ?
+
+
+% f(r)=r * (r-1)= r^2 - r
+% r_{higher tha u}=f(x_max)=0,5
+% % TODO explain functions+graphs
+
+% -> 0,5-\epsilon > 0 = r > u
+
+
+
+
+
+
+% % - truthful bidding a dominant: yes, an initially reserved price doesnt change this and truthful bidding a dominant strategy on first and 2nd price auctions
+% %TODO formal ausdrücken
+% \\
+% % - ?! mir fehlt der ansatz...
+% % also mit u = 0 anfangen und dann zeigen, dass r > u sein kann.
+
+
+% ---
+% solution v2:
+
+At first we have to consider 2 cases:\\
+if for bid b and reserved price r:\\
+1. $b<r$ then the item is not sold, payment is 0\\
+2. $b>r$ then seller receives r\\
+\\\\
+Expected revenue:\\
+$E(r) = 0 * r + r * (1-r)$\\
+0 and r are payments\\
+r and 1-r are probabilities:\\
+$P[v<r] = r$\\
+$P[v>r] = 1-r$\\
+% TODO Reason?\\
+% bc.: \\
+% ...\\
+
+this means:\\
+E(r)= r - r^2\\
+E'(r)= 1 - 2*r\\
+so the maximum is at r = 1/2\\
+
+% TODO write whole sentences
+
+so we can conclude:\\
+
+% TODO check if still right
+\\\\
+cases:\\
+$r > 0,5$:  utility is negative, bc 0,5(this is E[V]?) -r is negative\\
+$r = 0,5$:  utility is zero, so buyer is free to decide, and the seller cant know if\\ the buyer will buy, so seller will evade this case\\
+$r < 0,5$: utility is positive, bc 0,5(this is E[V]?) -r is postive\\
+\\\\
+but r < 0,5 , bc if its 0,5 the bidder can do whatever he wants. so not good for seller, so\\
+$\rightarrow$ r < 0,5\\
+$\rightarrow$ 0 < r < 0,5\\
+\\\\
+conclusion: the bidder will only bid if r is $0 < r < 0,5$, bc postive utility.
+BUT: the bid itself doesnt matter, bc SP-auction and he is the only bidder
+
+\end{document}

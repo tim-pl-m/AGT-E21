@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+\title{AGT}
+\author{Julian Rosemann, Tim Wieschalla, Michal Stefanik}
+\date{November 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\newcommand{\PoA}{\textup{PoA}}
+\newcommand{\PoS}{\textup{PoS}}
+
+\newcommand{\NE}{\textup{NE}}
+
+\newcommand{\maxl}[1]{\underset{#1}{\max\ }}
+\newcommand{\minl}[1]{\underset{#1}{\min\ }}
+
+\newcommand{\stpath}{$s$-$t$-path}
+\newcommand{\lenshort}{|\text{shortest \stpath}|}
+\newcommand{\lenlong}{|\text{longest \stpath}|}
+
+
+\paragraph{Definition}
+For two nodes $v$ and $w$ in a directed Graph $G$ we write
+\[
+    v \rightarrow^*_G w,
+\]
+if there is a path from $v$ to $w$.
+
+\subsection*{Exercise 12}
+
+
+Consider the sending from $s$ to $t$ game.
+In this game there are two different kinds of Nash equilibria:
+\begin{itemize}
+    \item path equilibria: any $s$-$t$-path in $G[\sigma]$ is a Nash equilibria
+    \item no-path equilibria: any strategy profile $\sigma$ if for any nodes $v$, $w$ in $G$ the following condition holds:
+    \[
+        s\rightarrow^*_{G[\sigma]} v \wedge w\rightarrow^*_{G[\sigma]} t \Rightarrow (v,w) \notin G.
+    \]
+\end{itemize}
+In any graph at least one pure Nash equilibria exists:
+If there a \stpath this path defines a pure Nash equilibria, and if there is no \stpath any strategy profile is a no-path equilibria.
+There  may also be other mixed Nash equilibria, but they are also either path or no-path equilibria and the only difference relevant to our cost or utility functions is the (expected) length of the path.
+Furthermore the minimal and maximal length of a path can always be achieved by a pure Nash equilibria.
+
+
+\paragraph{For the cost function}
+\[
+    C(s) \coloneqq
+    \begin{cases}
+        \sum\limits_{i\in \mathds{N}}u_i(s) &, \text{ if there is a \stpath in G[s]}\\
+        n^2                            &, \text{ otherwise}.
+    \end{cases}
+\]
+Since exactly those nodes get utility 1 which are on the \stpath (or in case of a mixed Nash equilibria, they get as utility the probability of being on the \stpath) the summation of all the utilities equals the (expected) length of the path.
+Thus the price of anarchy is:
+\begin{align*}
+    \PoA_C(\Gamma) =& \frac{\maxl{\sigma\in \NE(\Gamma)} C(\sigma)}{\minl{s\in S} C(s)}\\
+    =& \begin{cases}
+        \frac{n^2}{n^2} = 1 &, \text{ if there is no \stpath{}}\\
+        \frac{n^2}{\lenshort} &, \text{ if a no-path equilibria exists and a \stpath{}}\\
+        \frac{\lenlong}{\lenshort} &, \text{ otherwise}
+    \end{cases}\\
+    \leq \frac{n^2}{2}
+\end{align*}
+The upper bound is achieved because the worst thing possible would be a graph in the second case with a short \stpath{}, but the shortest possible \stpath{} for a graph where a no-path equilibria exists has length 2.
+
+The price of stability is constant:
+\begin{align*}
+    \PoS_C(\Gamma) &= \frac{\minl{s\in \NE (\Gamma)}C(\sigma)}{\minl{s\in S}C(s)}\\
+    &= \begin{cases}
+        \frac{n^2}{n^2} = 1 &, \text{ if there is no \stpath{}}\\
+        \frac{\lenshort}{\lenshort} = 1 &, \text{ otherwise}\\
+    \end{cases}\\
+    &= 1
+\end{align*}
+
+\paragraph{For the utility function}
+\[
+    U_1(s) \coloneqq \max_{i\in\mathds{N}} u_i(s).
+\]
+There are only two possible values for the price of anarchy:
+\begin{align*}
+    \PoA_{U_1}(\Gamma) =& \frac{\minl{\sigma\in \NE(\Gamma)} U_1(\sigma)}{\maxl{s\in S} U_1(s)}\\
+  =& \begin{cases}
+    0 &, \text{ if there is a \stpath{} and a no-path equilibria}\\
+    1 &, \text{ otherwise}
+    \end{cases}
+\end{align*}
+And again the price of stability is equal to 1:
+\begin{align*}
+  \PoS_{U_1} = \frac{\maxl{\sigma\in \NE(\Gamma)} U_1(\sigma)}{\maxl{s\in S} U_1(s)} = 1
+\end{align*}
+
+\paragraph{For the utility function}
+\[
+    U_2(s) \coloneqq \sum_{i\in \mathds{N}} u_i(s).
+  \]
+The upperbound for the price of anarchy on a graph with a \stpath is achieved when the difference between the longest and shortest \stpath is maximized:
+\begin{align*}
+  \PoA_{U_2}(\Gamma) =& \frac{\minl{\sigma\in \NE(\Gamma)} U_2(\sigma)}{\maxl{s\in S} U_2(s)}\\
+  =&\begin{cases}
+    0 &, \text{ if there is a \stpath{} and a no-path equilibria}\\
+    1 &, \text{ if there is no \stpath{}}\\
+    \frac{\lenshort}{\lenlong} &, \text{ otherwise}
+  \end{cases}\\
+  \leq& \frac{1}{n-1} \text{, if there is a \stpath}
+\end{align*}
+Also in this last case the price of stability is 1:
+\begin{align*}
+  \PoS_{U_1} = \frac{\maxl{\sigma\in \NE(\Gamma)} U_1(\sigma)}{\maxl{s\in S} U_1(s)} = 1.
+\end{align*}
+
+
+\end{document}
